@@ -30,21 +30,22 @@ post '/visit' do
 ###########################
 #хеши ключ /значение
   hh = {:username => 'Введите имя',
-       :phone => 'Введите телефон',
-       :datetime => 'Введите время посещения'}
+      :phone => 'Введите телефон',
+      :datetime => 'Введите время посещения'}
   # для каждой пары ключ/значение
-  hh.each do |key, value|
-
+ # hh.each do |key, value|
     #если параметр пуст
-  if params[key] == ''
-
+ # if params[key] == ''
     # переменной эррор присвоить валью из хеша
-  @error = hh[key]
-
+ # @error = hh[key]
+ # return erb :visit
+ # end
+ # end
+#########################
+@error = hh.select {|key,_|params[key] == ""}.values.join(",")
+  if @error != ''
   return erb :visit
   end
-  end
-#########################
 
   erb "ok!,#{@username},#{@phone},#{@datetime},#{@barber},#{@color}"
 end
