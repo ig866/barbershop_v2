@@ -23,14 +23,28 @@ post '/visit' do
 
   @username = params[:username]
   @phone = params[:phone]
-	@date_time = params[:datetime]
+	@datetime = params[:datetime]
   @barber = params[:barber]
   @color = params[:color]
 
-  if @username = ' '
-     @error = "Введите имя"
-    return erb :visit
-  end
+###########################
+#хеши ключ /значение
+  hh = {:username => 'Введите имя',
+       :phone => 'Введите телефон',
+       :datetime => 'Введите время посещения'}
+  # для каждой пары ключ/значение
+  hh.each do |key, value|
 
-  erb "ok!,#{@username},#{@phone},#{@date_time},#{@barber},#{@color}"
+    #если параметр пуст
+  if params[key] == ''
+
+    # переменной эррор присвоить валью из хеша
+  @error = hh[key]
+
+  return erb :visit
+  end
+  end
+#########################
+
+  erb "ok!,#{@username},#{@phone},#{@datetime},#{@barber},#{@color}"
 end
