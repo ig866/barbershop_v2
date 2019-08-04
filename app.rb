@@ -3,7 +3,7 @@ require 'sinatra'
 require 'sinatra/reloader'
 
 get '/' do
-	erb "Hello! <a href=\"https://github.com/bootstrap-ruby/sinatra-bootstrap\">Original</a> pattern has been modified for <a href=\"http://rubyschool.us/\">Ruby School</a>"			
+	erb "Hello!"
 end
 
 get '/about' do
@@ -24,5 +24,6 @@ post '/visit' do
   @phone = params[:phone]
 	@date_time = params[:datetime]
   @barber = params[:barber]
-  erb "ok!,#{@user_name},#{@phone},#{@date_time},#{@barber}"
+  @color = params[:color]
+  erb "ok!,#{@user_name},#{@phone},#{@date_time},#{@barber},#{@color}"
 end
