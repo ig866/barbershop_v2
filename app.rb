@@ -19,6 +19,20 @@ get '/contacts' do
 	erb :contacts
 end
 
+post '/contacts' do
+  @customer_mail = params[:customer_mail]
+
+h1 ={:customer_mail =>'Введите почту'}
+
+@error = h1.select {|key,_|params[key] == ""}.values.join(",")
+
+  if @error != ''
+  return erb :contacts
+end
+
+  erb "ok!,#{@customer_mail}"
+end
+
 post '/visit' do
 
   @username = params[:username]

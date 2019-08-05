@@ -1,2 +1,14 @@
 <h3>О нас</h3>
 <p>Контакты</p>
+
+
+<form action="/contacts" method="POST" role="form">
+
+<div class="form-group">
+  <label>Введите вашу почту</label>
+  <input name="customer_mail" type="text" class="form-control" placeholder="Ваше почта" value="<%= @customer_mail %>">
+</div>
+
+<button type="submit" class="btn btn-primary">Отправить напоминание</button>
+
+</form>
