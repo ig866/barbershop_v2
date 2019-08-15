@@ -22,9 +22,9 @@
   <div class="form-group">
     <label>Выберите парикмахера</label>
     <select name="barber"class="form-control">
-      <option>Ann</option>
-      <option>jhon</option>
-      <option>Rud</option>
+      <option <%= @barber =='Ann'? 'selected': ''%>>Ann</option>
+      <option> <%= @barber =='Jhon'? 'selected': ''%>Jhon</option>
+      <option> <%= @barber =='Rud'? 'selected': ''%>Rud</option>
   </select>
   </div>
 
