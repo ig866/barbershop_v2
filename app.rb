@@ -3,9 +3,13 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 
+def get_db
+  return SQLite3::Database.new "barbershop_db"
+end
+
 configure do
-  @db = SQLite3::Database.new "barbershop_db"
- @db.execute "create table if not exists
+  db = get_db
+ db.execute "create table if not exists
       Users
      (
      	id INTEGER not null
@@ -45,6 +49,7 @@ post '/visit' do
 
 ###########################
 #хеши ключ /значение
+#
   hh = {:username => 'Введите имя',
       :phone => 'Введите телефон',
       :datetime => 'Введите время посещения'}
@@ -63,8 +68,22 @@ post '/visit' do
   return erb :visit
   end
 
+  db = get_db
+  db.execute 'insert into users
+                  (
+                   username,
+                   phone,
+                   datestamp,
+                   barber,
+                   color
+                   )
+  values
+  ( ?, ?, ?, ? ,?)', [@username,@phone,@datetime,@barber,@color]
+
   erb "ok!,#{@username},#{@phone},#{@datetime},#{@barber},#{@color}"
 end
+
+
 
 post '/contacts' do
   require "pony"
@@ -78,7 +97,7 @@ post '/contacts' do
   Pony.mail({
 
                 :subject => "Вы записаны в наш Barbershop",
-                :body => 'йобанаврот оно работает',
+                :body => 'оно работает',
                 :to => @customer_mail,
                 :from => 'ihor.boiko1@gmail.com',
 
